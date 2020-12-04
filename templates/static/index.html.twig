@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }}- Accueil {% endblock %}
+    {% block contenu %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <p>Vous êtes connecté en tant que {{ app.user.username }} (Admin)</p>
+            {% else %}
+                {% if is_granted('ROLE_USER') %}
+                    <p>Vous êtes connecté en tant que {{ app.user.username }} (Utilisateur)</p> {% endif %}
+            {% endif %}
+
+        {% endif %}
+        <div class="text-center">
+            <h1 class="p-4">Page d'accueil</h1>
+        </div>
+    {% endblock %}
