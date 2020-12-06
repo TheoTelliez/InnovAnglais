@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AbonnementsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,17 @@ class Abonnements
      * @ORM\Column(type="boolean")
      */
     private $paiementenunefois;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="abonnements")
+     */
+    private $utilisateurs;
+
+    public function __construct()
+    {
+        $this->utilisateurs = new ArrayCollection();
+    }
+    
 
     public function getId(): ?int
     {
@@ -52,6 +65,48 @@ class Abonnements
     public function setPaiementenunefois(bool $paiementenunefois): self
     {
         $this->paiementenunefois = $paiementenunefois;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getUtilisateurs(): Collection
+    {
+        return $this->utilisateurs;
+    }
+
+    public function addUtilisateur(Utilisateur $utilisateur): self
+    {
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs[] = $utilisateur;
+            $utilisateur->setAbonnements($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtilisateur(Utilisateur $utilisateur): self
+    {
+        if ($this->utilisateurs->removeElement($utilisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($utilisateur->getAbonnements() === $this) {
+                $utilisateur->setAbonnements(null);
+            }
+        }
 
         return $this;
     }

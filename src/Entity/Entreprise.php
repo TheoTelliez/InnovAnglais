@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EntrepriseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,23 @@ class Entreprise
      */
     private $libelle;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Liste::class, mappedBy="entreprise")
+     */
+    private $listes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="entreprise")
+     */
+    private $utilisateurs;
+
+    public function __construct()
+    {
+        $this->listes = new ArrayCollection();
+        $this->utilisateurs = new ArrayCollection();
+    }
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +54,78 @@ class Entreprise
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getListe(): ?Liste
+    {
+        return $this->liste;
+    }
+
+    public function setListe(?Liste $liste): self
+    {
+        $this->liste = $liste;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Liste[]
+     */
+    public function getListes(): Collection
+    {
+        return $this->listes;
+    }
+
+    public function addListe(Liste $liste): self
+    {
+        if (!$this->listes->contains($liste)) {
+            $this->listes[] = $liste;
+            $liste->setEntreprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListe(Liste $liste): self
+    {
+        if ($this->listes->removeElement($liste)) {
+            // set the owning side to null (unless already changed)
+            if ($liste->getEntreprise() === $this) {
+                $liste->setEntreprise(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getUtilisateurs(): Collection
+    {
+        return $this->utilisateurs;
+    }
+
+    public function addUtilisateur(Utilisateur $utilisateur): self
+    {
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs[] = $utilisateur;
+            $utilisateur->setEntreprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtilisateur(Utilisateur $utilisateur): self
+    {
+        if ($this->utilisateurs->removeElement($utilisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($utilisateur->getEntreprise() === $this) {
+                $utilisateur->setEntreprise(null);
+            }
+        }
 
         return $this;
     }

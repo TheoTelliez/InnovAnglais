@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,17 @@ class Categorie
      */
     private $libelle;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Mot::class, mappedBy="categorie")
+     */
+    private $mots;
+
+    public function __construct()
+    {
+        $this->mots = new ArrayCollection();
+    }
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +48,48 @@ class Categorie
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getMot(): ?Mot
+    {
+        return $this->mot;
+    }
+
+    public function setMot(?Mot $mot): self
+    {
+        $this->mot = $mot;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Mot[]
+     */
+    public function getMots(): Collection
+    {
+        return $this->mots;
+    }
+
+    public function addMot(Mot $mot): self
+    {
+        if (!$this->mots->contains($mot)) {
+            $this->mots[] = $mot;
+            $mot->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMot(Mot $mot): self
+    {
+        if ($this->mots->removeElement($mot)) {
+            // set the owning side to null (unless already changed)
+            if ($mot->getCategorie() === $this) {
+                $mot->setCategorie(null);
+            }
+        }
 
         return $this;
     }
