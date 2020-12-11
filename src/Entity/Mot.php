@@ -35,6 +35,11 @@ class Mot
      */
     private $categorie;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $libelleen;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -120,6 +125,18 @@ class Mot
     public function setCategorie(?Categorie $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getLibelleen(): ?string
+    {
+        return $this->libelleen;
+    }
+
+    public function setLibelleen(string $libelleen): self
+    {
+        $this->libelleen = $libelleen;
 
         return $this;
     }

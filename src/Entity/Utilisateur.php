@@ -31,26 +31,12 @@ class Utilisateur
      */
     private $prenom;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
-    
 
     /**
      * @ORM\OneToMany(targetEntity=Realise::class, mappedBy="utilisateur")
      */
     private $realises;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="utilisateurs")
-     */
-    private $role;
 
     /**
      * @ORM\ManyToOne(targetEntity=Abonnements::class, inversedBy="utilisateurs")
@@ -62,11 +48,16 @@ class Utilisateur
      */
     private $entreprise;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $user;
+    
+
     public function __construct()
     {
         $this->tests = new ArrayCollection();
         $this->testsrealise = new ArrayCollection();
-        $this->roles = new ArrayCollection();
         $this->abonnements = new ArrayCollection();
         $this->realises = new ArrayCollection();
     }
@@ -100,29 +91,8 @@ class Utilisateur
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
 
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Test[]
@@ -178,35 +148,6 @@ class Utilisateur
         return $this;
     }
 
-    /**
-     * @return Collection|Role[]
-     */
-    public function getRoles(): Collection
-    {
-        return $this->roles;
-    }
-
-    public function addRole(Role $role): self
-    {
-        if (!$this->roles->contains($role)) {
-            $this->roles[] = $role;
-            $role->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRole(Role $role): self
-    {
-        if ($this->roles->removeElement($role)) {
-            // set the owning side to null (unless already changed)
-            if ($role->getUtilisateur() === $this) {
-                $role->setUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Abonnements[]
@@ -268,17 +209,6 @@ class Utilisateur
         return $this;
     }
 
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
-
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
 
     public function setAbonnements(?Abonnements $abonnements): self
     {
@@ -298,4 +228,17 @@ class Utilisateur
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }
