@@ -27,7 +27,7 @@ class MotController extends AbstractController
      */
     public function ajoutMot(Request $request)
     {
-        $mot = new Mot(); // Instanciation d’un objet Theme
+        $mot = new Mot(); // Instanciation d’un objet Mot
         $form = $this->createForm(AjoutMotType::class, $mot); // Création du formulaire pour ajouter un thème, en lui donnant l’instance .
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -37,7 +37,7 @@ class MotController extends AbstractController
                 $em->flush(); // Nous validons notre ajout
                 $this->addFlash('notice', 'Mot inséré'); // Nous préparons le message à afficher à l’utilisateur sur la page où il se rendra
             }
-            return $this->redirectToRoute('ajout-mot'); // Nous redirigeons l’utilisateur sur l’ajout d’un thème après l’insertion.
+            return $this->redirectToRoute('ajout-mot'); // Nous redirigeons l’utilisateur sur l’ajout d’un mot après l’insertion.
         }
         return $this->render('mot/ajout-mot.html.twig', [
             'form' => $form->createView() // Nous passons le formulaire à la vue
