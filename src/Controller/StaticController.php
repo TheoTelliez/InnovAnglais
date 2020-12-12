@@ -52,6 +52,7 @@ class StaticController extends AbstractController
                     $em->flush();
                     $this->addFlash('notice', 'Inscription réussie');
                     return $this->redirectToRoute('app_login');
+                    //ICI METTE AJOUT UTILISATEUR EN redirectToRoute
                 }
 
                 else{

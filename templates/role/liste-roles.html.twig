@@ -20,7 +20,7 @@
                         <tbody>
                         {% for role in roles %}
                             <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
-                                <td>{{role.libelle |capitalize }}</td>
+                                <td>{{role.libelle }}</td>
 {#                                <td><a href="{{path('modif-role',{'id': role.id})}}" class="text-white"><span class="material-icons" title="Modifier un rôle">create</span></a></td>#}
                                 <td><a href="{{path('modif-role',{'id': role.id})}}"class="text-white"><span class="material-icons" title="Modifier un rôle">create</span></a></td>
                                 <td><a href="{{path('liste-roles',{'supp':role.id})}}" class="text-white"><span class="material-icons" title="Supprimer le rôle">delete</span></a></td>

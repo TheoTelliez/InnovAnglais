@@ -10,8 +10,13 @@
                 {{ form_start(form) }}
 
                 <div class="form-group">
-                    {{ form_label(form.libelle, 'Le nouveau libelle (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
+                    {{ form_label(form.libelle, 'Le nouveau libelle (FR) (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
                     {{ form_widget(form.libelle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.libelleen, 'Le nouveau libelle (EN) (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
+                    {{ form_widget(form.libelleen, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
                 <div class="form-group mx-auto text-center">
