@@ -16,6 +16,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Form\CategorieType;
 use App\Form\ModifCategorieType;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityRepository;
+
 
 
 class CategorieController extends AbstractController
@@ -53,9 +55,9 @@ class CategorieController extends AbstractController
         $repoCategorie = $em->getRepository(Categorie::class);
 
         if ($request->get('supp')!=null){
-            $theme = $repoCategorie->find($request->get('supp'));
-            if($theme!=null){
-                $em->getManager()->remove($theme);
+            $cat = $repoCategorie->find($request->get('supp'));
+            if($cat!=null){
+                $em->getManager()->remove($cat);
                 $em->getManager()->flush();
                 $this->addFlash('notice', "La catégorie a été supprimé !");
             }
@@ -99,12 +101,6 @@ class CategorieController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-
-
-
-
-
 
 
 

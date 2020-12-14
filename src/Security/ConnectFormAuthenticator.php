@@ -65,13 +65,15 @@ class ConnectFormAuthenticator extends AbstractFormLoginAuthenticator implements
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
+            // ne marche pas :
+            //throw new CustomUserMessageAuthenticationException('Mot de passe erroné , veuillez réessayer.');
         }
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('L\'email n\'a pas pu être trouvée, veuillez réessayer.');
         }
 
         return $user;
