@@ -21,7 +21,7 @@ use App\Entity\Categorie;
 class RoleController extends AbstractController
 {
     /**
-     * @Route("/role", name="role")
+     * @Route("/ajout-role", name="ajout-role")
      */
     public function role(Request $request)
     {
