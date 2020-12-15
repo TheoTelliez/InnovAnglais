@@ -49,13 +49,6 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
-<<<<<<< HEAD
-    public function loadUsers(){
-        for($i=0;$i<10;$i++){
-            $user = new Utilisateur();
-            $user->setNom($this->faker->lastName())
-                ->setPrenom($this->faker->firstName()) ;
-=======
     public function loadUtilisateurs()
     {
         for ($i = 0; $i < 10; $i++) {
@@ -78,7 +71,6 @@ class AppFixtures extends Fixture
             ->setAbonnements($this->getReference('abo' . mt_rand(1, 2)))
             ->setEntreprise($this->getReference('ent1'));
         //->setUsers($this->getReference('user10'));
->>>>>>> eee321f16eaef63fe5341f055ad3ae81eda38cf2
 
         //->setDateInscription(new \DateTime());
         $this->addReference('theo', $utilisateur);
@@ -101,26 +93,17 @@ class AppFixtures extends Fixture
             $emailSans = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $emailSans); // pour les ligatures e.g. 'œ'
             $emailSans = preg_replace('#&[^;]+;#', '', $emailSans); // supprime les autres caractères
 
-<<<<<<< HEAD
-            $user->setEmail($emailSans)
-=======
 
             $user->setEmail(strtolower($emailSans))
                 ->setPassword($this->encoder->encodePassword($user, 'test'))
                 ->setRoles(array('ROLE_USER'));
->>>>>>> eee321f16eaef63fe5341f055ad3ae81eda38cf2
 
             $user->setUtilisateur($utilisateur);
             $utilisateur->setUser($user);
 
-<<<<<<< HEAD
-            //->setDateInscription($this->faker->dateTimeThisYear);
-            $this->addReference('user'.$i, $user);
-=======
             $this->manager->persist($utilisateur);
 
             $this->addReference('user' . $i, $user);
->>>>>>> eee321f16eaef63fe5341f055ad3ae81eda38cf2
             $this->manager->persist($user);
         }
 
@@ -153,13 +136,6 @@ class AppFixtures extends Fixture
             $this->addReference('ent' . $i, $ent);
             $this->manager->persist($ent);
         }
-
-        $ent = new Entreprise();
-        $ent->setLibelle('Ent2');
-
-        $this->addReference('ent2', $ent);
-        $this->manager->persist($ent);
-        $this->manager->flush();
 
     }
 
