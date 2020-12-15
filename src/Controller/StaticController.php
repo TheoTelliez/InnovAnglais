@@ -14,6 +14,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Categorie;
 use App\Entity\Role;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Entity\User;
+use App\Form\InscriptionType;
 
 
 class StaticController extends AbstractController
@@ -27,6 +30,8 @@ class StaticController extends AbstractController
             'controller_name' => 'StaticController',
         ]);
     }
+
+
 
 
 

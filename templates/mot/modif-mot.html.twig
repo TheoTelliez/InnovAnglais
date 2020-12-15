@@ -11,8 +11,13 @@
                 {{ form_start(form) }}
 
                 <div class="form-group">
-                    {{ form_label(form.libelle, 'Le nouveau nom du mot (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
+                    {{ form_label(form.libelle, 'Le nouveau nom du mot (FR) (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
                     {{ form_widget(form.libelle, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.libelleen, 'Le nouveau nom du mot (EN) (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
+                    {{ form_widget(form.libelleen, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
                 <div class="form-group mx-auto text-center">

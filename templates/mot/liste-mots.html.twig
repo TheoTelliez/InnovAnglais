@@ -12,7 +12,8 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th scope="col">Libellé</th>
+                            <th scope="col">Libellé FR</th>
+                            <th scope="col">Libellé EN</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
@@ -21,6 +22,7 @@
                         {% for mot in mots %}
                             <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
                                 <td>{{mot.libelle |capitalize }}</td>
+                                <td>{{mot.libelleen |capitalize }}</td>
                                 <td><a href="{{path('modif-mot',{'id':mot.id})}}"class="text-white"><span class="material-icons" title="Modifier un mot">create</span></a></td>
                                 <td><a href="{{path('liste-mots',{'supp':mot.id})}}" class="text-white"><span class="material-icons" title="Supprimer le mot">delete</span></a></td>
                             </tr>

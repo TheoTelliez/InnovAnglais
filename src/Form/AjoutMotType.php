@@ -15,6 +15,7 @@ class AjoutMotType extends AbstractType
     {
         $builder
             ->add('libelle', TextType::class)
+            ->add('libelleen', TextType::class)
             ->add('ajouter',SubmitType::class);
         ;
     }
