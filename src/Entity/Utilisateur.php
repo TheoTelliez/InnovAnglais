@@ -52,6 +52,11 @@ class Utilisateur
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="utilisateur", cascade={"persist", "remove"})
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
     
 
     public function __construct()
@@ -237,6 +242,18 @@ class Utilisateur
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }
