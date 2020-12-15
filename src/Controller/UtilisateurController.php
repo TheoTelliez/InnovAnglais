@@ -106,7 +106,16 @@ class UtilisateurController extends AbstractController
     {
         $em = $this->getDoctrine();
         $repoUtilisateur = $em->getRepository(Utilisateur::class);
-        $utilisateurs = $repoUtilisateur->findBy(array(),array('nom'=>'ASC'));
+        $utilisateurs = $repoUtilisateur->findBy(array(),array('id'=>'ASC'));
+        if ($request->get('supp')!=null){
+            $utilisateur = $repoUtilisateur->find($request->get('supp'));
+            if($utilisateur!=null){
+                $em->getManager()->remove($utilisateur);
+                $em->getManager()->flush();
+                $this->addFlash('notice', 'Utilisateur supprimé');
+            }
+            return $this->redirectToRoute('liste-utilisateurs');
+        }
         return $this->render('utilisateur/liste-utilisateurs.html.twig', [
             'utilisateurs'=>$utilisateurs // Nous passons la liste des utilisateurs à la vue
         ]);
