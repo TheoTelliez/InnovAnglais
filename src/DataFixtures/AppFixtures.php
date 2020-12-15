@@ -42,11 +42,6 @@ class AppFixtures extends Fixture
     public function loadUsers(){
         for($i=0;$i<10;$i++){
             $user = new Utilisateur();
-
-
-
-
-
             $user->setNom($this->faker->lastName())
                 ->setPrenom($this->faker->firstName()) ;
 
@@ -58,7 +53,6 @@ class AppFixtures extends Fixture
             $emailSans = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $emailSans); // pour les ligatures e.g. 'œ'
             $emailSans = preg_replace('#&[^;]+;#', '', $emailSans); // supprime les autres caractères
 
-
             $user->setEmail($emailSans)
 
                 //->setPassword($this->encoder->encodePassword($mdpCode))
@@ -66,7 +60,6 @@ class AppFixtures extends Fixture
                 ->setAbonnements($this->getReference('abo'.mt_rand(1,2)))
                 ->setEntreprise($this->getReference('ent1'))
                 ->setRole($this->getReference('role1'));
-
 
             //->setDateInscription($this->faker->dateTimeThisYear);
             $this->addReference('user'.$i, $user);
@@ -115,6 +108,13 @@ class AppFixtures extends Fixture
         $ent->setLibelle('Ent1');
 
         $this->addReference('ent1', $ent);
+        $this->manager->persist($ent);
+        $this->manager->flush();
+
+        $ent = new Entreprise();
+        $ent->setLibelle('Ent2');
+
+        $this->addReference('ent2', $ent);
         $this->manager->persist($ent);
         $this->manager->flush();
 
