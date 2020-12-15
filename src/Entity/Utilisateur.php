@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Abonnements;
 
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
@@ -157,7 +158,7 @@ class Utilisateur
     /**
      * @return Collection|Abonnements[]
      */
-    public function getAbonnements(): Collection
+    public function getAbonnements(): ?Collection
     {
         return $this->abonnements;
     }

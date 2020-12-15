@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Utilisateur;
+use App\Entity\Abonnement;
+use App\Entity\Entreprise;
 use App\Form\AjoutUtilisateurType;
 use App\Form\ImageProfilType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -96,6 +98,20 @@ class UtilisateurController extends AbstractController
             'base64' => $base64
         ]);
     }
+
+    /**
+     * @Route("/liste-utilisateurs", name="liste-utilisateurs")
+     */
+    public function listeUtilisateurs(Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoUtilisateur = $em->getRepository(Utilisateur::class);
+        $utilisateurs = $repoUtilisateur->findBy(array(),array('nom'=>'ASC'));
+        return $this->render('utilisateur/liste-utilisateurs.html.twig', [
+            'utilisateurs'=>$utilisateurs // Nous passons la liste des utilisateurs à la vue
+        ]);
+    }
+
 
 
 
