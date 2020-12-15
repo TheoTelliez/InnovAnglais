@@ -19,6 +19,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,8 +33,8 @@
                             <td style="text-align: center">{{app.utilisateur.entreprise.libelle }}</td>#}
                             <td><a href="{{path('user-profile',{'id':utilisateur.id})}}" class="text-white">
                                     <span class="material-icons" title="Accéder au profil">account_circle</span></a></td>
-                            {#<td><a href="{{path('modif-utilisateur',{'id':utilisateur.id})}}" class="text-white">
-                                    <span class="material-icons" title="Modifier un utilisateur">create</span></a></td>#}
+                            <td><a href="{{path('modif-utilisateur',{'id':utilisateur.id})}}" class="text-white">
+                                    <span class="material-icons" title="Modifier un utilisateur">create</span></a></td>
                             <td><a href="{{path('liste-utilisateurs',{'supp':utilisateur.id})}}"  class="text-white">
                                     <span class="material-icons" title="Supprimer le utilisateur">delete</span></a></td>
                         </tr>

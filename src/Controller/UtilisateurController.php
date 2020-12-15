@@ -10,6 +10,7 @@ use App\Entity\Utilisateur;
 use App\Entity\Abonnement;
 use App\Entity\Entreprise;
 use App\Form\AjoutUtilisateurType;
+use App\Form\ModifUtilisateurType;
 use App\Form\ImageProfilType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -118,6 +119,34 @@ class UtilisateurController extends AbstractController
         }
         return $this->render('utilisateur/liste-utilisateurs.html.twig', [
             'utilisateurs'=>$utilisateurs // Nous passons la liste des utilisateurs à la vue
+        ]);
+    }
+
+    /**
+     * @Route("/modif-utilisateur/{id}", name="modif-utilisateur", requirements={"id"="\d+"})
+     */
+    public function modifUtilisateur(int $id, Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoUtilisateur = $em->getRepository(Utilisateur::class);
+        $utilisateur = $repoUtilisateur->find($id);
+        if ($utilisateur == null) {
+            $this->addFlash('notice', "Cet utilisateur n'existe pas");
+            return $this->redirectToRoute('liste-utlisateurs');
+        }
+        $form = $this->createForm(ModifUtilisateurType::class, $utilisateur);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($utilisateur);
+                $em->flush();
+                $this->addFlash('notice', 'Utilisateur modifié');
+            }
+            return $this->redirectToRoute('liste-utilisateurs');
+        }
+        return $this->render('utilisateur/modif-utilisateur.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 
