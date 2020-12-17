@@ -7,12 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Utilisateur;
-<<<<<<< HEAD
+
 use App\Entity\Abonnements;
-=======
-use App\Entity\Abonnement;
 use App\Entity\Entreprise;
->>>>>>> 475f8d9ed96e7a592a7f3b6ccdae8aa390c8a637
 use App\Form\AjoutUtilisateurType;
 use App\Form\ModifUtilisateurType;
 use App\Form\ImageProfilType;
