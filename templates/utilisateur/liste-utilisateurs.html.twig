@@ -28,9 +28,7 @@
                             <td style="text-align: center">{{utilisateur.prenom |capitalize }}</td>
                             <td style="text-align: center">{{utilisateur.abonnement.libelle }}</td>
                             <td style="text-align: center">{{utilisateur.entreprise.libelle }}</td>
-
-                            {#<td style="text-align: center">{{utilisateur.abonnements.libelle}}</td>
-                            <td style="text-align: center">{{app.utilisateur.entreprise.libelle }}</td>#}
+                            
                             <td><a href="{{path('user-profile',{'id':utilisateur.id})}}" class="text-white">
                                     <span class="material-icons" title="Accéder au profil">account_circle</span></a></td>
                             <td><a href="{{path('modif-utilisateur',{'id':utilisateur.id})}}" class="text-white">
