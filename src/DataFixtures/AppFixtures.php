@@ -137,13 +137,6 @@ class AppFixtures extends Fixture
             $this->manager->persist($ent);
         }
 
-        $ent1 = new Entreprise();
-
-        $ent1->setLibelle("Pas d'entreprise");
-
-        $this->addReference('ent', $ent1);
-        $this->manager->persist($ent1);
-
     }
 
     public function loadRole()
