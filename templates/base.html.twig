@@ -51,6 +51,15 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">Abonnements</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('ajout-abonnement') }}">Ajout d'un abonnement</a>
+                        <a class="dropdown-item" href="{{ path('liste-abonnements') }}">Liste des Abonnements</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Role</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{ path('ajout-role') }}">Ajout d'un rôle</a>
