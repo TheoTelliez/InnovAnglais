@@ -24,6 +24,7 @@ class AjoutUtilisateurType extends AbstractType
             ->add('prenom', TextType::class)
             //->add('role', EntityType::class, array( 'class' => 'App\Entity\Role', 'choice_label' => 'libelle'))
             ->add('abonnement', EntityType::class, array( 'class' => 'App\Entity\Abonnements', 'choice_label' => 'libelle'))
+            ->add('entreprise', EntityType::class, array( 'class' => 'App\Entity\Entreprise', 'choice_label' => 'libelle'))
             ->add('ajouter',SubmitType::class);
         ;
     }

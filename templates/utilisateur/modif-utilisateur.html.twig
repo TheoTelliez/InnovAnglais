@@ -19,6 +19,16 @@
                     {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
+                <div class="form-group" style="color:white">
+                    {{ form_label(form.abonnement, 'Abonnement (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
+                    {{ form_widget(form.abonnement, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group" style="color:white">
+                    {{ form_label(form.entreprise, 'Entreprise', {'label_attr': {'class': 'font-weightbold'}}) }}
+                    {{ form_widget(form.entreprise, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
                 <div class="form-group mx-auto text-center">
                     {{ form_widget(form.modifier, { 'label': "Modifier", 'attr': {'class': 'btn font-weightbold bg-primary text-white mx-auto text-center'}}) }}
                 </div>

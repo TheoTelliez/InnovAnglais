@@ -8,6 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 
 class ModifUtilisateurType extends AbstractType
 {
@@ -16,10 +18,11 @@ class ModifUtilisateurType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
+
+            ->add('abonnement', EntityType::class, array( 'class' => 'App\Entity\Abonnements', 'choice_label' => 'libelle'))
+            ->add('entreprise', EntityType::class, array( 'class' => 'App\Entity\Entreprise', 'choice_label' => 'libelle'))
+
             ->add('modifier', SubmitType::class)
-            /*->add('abonnements')
-            ->add('entreprise')
-            ->add('user')*/
         ;
     }
 
