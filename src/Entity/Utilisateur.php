@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Abonnements;
 
 
 /**
@@ -155,6 +156,38 @@ class Utilisateur
     }
 
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return Collection|Abonnements[]
+     */
+    public function getAbonnements(): ?Collection
+    {
+        return $this->abonnements;
+    }
+
+    public function addAbonnement(Abonnements $abonnement): self
+    {
+        if (!$this->abonnements->contains($abonnement)) {
+            $this->abonnements[] = $abonnement;
+            $abonnement->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbonnement(Abonnements $abonnement): self
+    {
+        if ($this->abonnements->removeElement($abonnement)) {
+            // set the owning side to null (unless already changed)
+            if ($abonnement->getUtilisateur() === $this) {
+                $abonnement->setUtilisateur(null);
+            }
+        }
+
+        return $this;
+    }
+>>>>>>> 475f8d9ed96e7a592a7f3b6ccdae8aa390c8a637
 
     /**
      * @return Collection|Realise[]

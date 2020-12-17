@@ -21,8 +21,10 @@
                         {% for theme in themes %}
                             <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
                                 <td>{{theme.libelle |capitalize }}</td>
-                                <td><a href="{{path('modif-theme',{'id':theme.id})}}"class="text-white"><span class="material-icons" title="Modifier un theme">create</span></a></td>
-                                <td><a href="{{path('liste-themes',{'supp':theme.id})}}" class="text-white"><span class="material-icons" title="Supprimer le theme">delete</span></a></td>
+                                <td><a href="{{path('modif-theme',{'id':theme.id})}}"class="text-white">
+                                        <span class="material-icons" title="Modifier un theme">create</span></a></td>
+                                <td><a href="{{path('liste-themes',{'supp':theme.id})}}" class="text-white">
+                                        <span class="material-icons" title="Supprimer le theme">delete</span></a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
