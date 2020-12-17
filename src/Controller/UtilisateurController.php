@@ -7,10 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Utilisateur;
+use App\Entity\Abonnements;
 use App\Form\AjoutUtilisateurType;
 use App\Form\ImageProfilType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\User;
 
 class UtilisateurController extends AbstractController
 {
@@ -25,12 +27,21 @@ class UtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/ajout-utilisateur", name="ajout-utilisateur")
+     * @Route("/ajout-utilisateur/{id}", name="ajout-utilisateur", requirements = {"id"="\d+"})
      */
-    public function ajoutUtilisateur(Request $request)
+    public function ajoutUtilisateur(Request $request, $id)
     {
         $utilisateur = new Utilisateur(); // Instanciation d’un objet Utilisateur
+        if ($id != null){
+            $em = $this->getDoctrine()->getRepository(User::class);
+            $user = $em->find($id);
+            $utilisateur->setUser($user);
+
+        }
+
         $form = $this->createForm(AjoutUtilisateurType::class, $utilisateur); // Création du formulaire pour ajouter un utilisateur, en lui donnant l’instance .
+
+
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -39,7 +50,7 @@ class UtilisateurController extends AbstractController
                 $em->flush(); // Nous validons notre ajout
                 $this->addFlash('notice', 'Utilisateur inséré'); // Nous préparons le message à afficher à l’utilisateur sur la page où il se rendra
             }
-            return $this->redirectToRoute('ajout-utilisateur'); // Nous redirigeons l’utilisateur sur l’ajout d’un utilisateur après l’insertion.
+            return $this->redirectToRoute('app_login'); // Nous redirigeons l’utilisateur sur l’ajout d’un utilisateur après l’insertion.
         }
         return $this->render('utilisateur/ajout-utilisateur.html.twig', [
             'form' => $form->createView() // Nous passons le formulaire à la vue

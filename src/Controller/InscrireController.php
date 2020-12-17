@@ -41,8 +41,7 @@ class InscrireController extends AbstractController
                     $em->persist($user);
                     $em->flush();
                     $this->addFlash('notice', 'Inscription réussie');
-                    return $this->redirectToRoute('app_login');
-                    //ICI METTE AJOUT UTILISATEUR EN redirectToRoute
+                    return $this->redirectToRoute('ajout-utilisateur',['id'=>$user->getId()]);
                 }
 
                 else{

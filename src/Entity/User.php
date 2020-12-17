@@ -35,9 +35,10 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity=Utilisateur::class, mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Utilisateur::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $utilisateur;
+
 
     public function getId(): ?int
     {
@@ -124,18 +125,10 @@ class User implements UserInterface
 
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
-        // unset the owning side of the relation if necessary
-        if ($utilisateur === null && $this->utilisateur !== null) {
-            $this->utilisateur->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($utilisateur !== null && $utilisateur->getUser() !== $this) {
-            $utilisateur->setUser($this);
-        }
-
         $this->utilisateur = $utilisateur;
 
         return $this;
     }
+
+    
 }
