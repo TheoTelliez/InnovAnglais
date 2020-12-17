@@ -155,7 +155,7 @@ class Utilisateur
         return $this;
     }
 
-    
+
 
     /**
      * @return Collection|Realise[]

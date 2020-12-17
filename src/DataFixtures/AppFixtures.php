@@ -58,7 +58,7 @@ class AppFixtures extends Fixture
                 ->setPrenom($this->faker->firstName());
 
 
-            $utilisateur->setAbonnements($this->getReference('abo' . mt_rand(1, 2)))
+            $utilisateur->setAbonnement($this->getReference('abo' . mt_rand(0, 9)))
                 ->setEntreprise($this->getReference('ent' . mt_rand(0, 9)));
 
 
@@ -68,7 +68,7 @@ class AppFixtures extends Fixture
         $utilisateur = new Utilisateur();
         $utilisateur->setNom('TELLIEZ')
             ->setPrenom('theo')
-            ->setAbonnements($this->getReference('abo' . mt_rand(1, 2)))
+            ->setAbonnement($this->getReference('abo' . mt_rand(0, 9)))
             ->setEntreprise($this->getReference('ent1'));
         //->setUsers($this->getReference('user10'));
 
@@ -136,6 +136,13 @@ class AppFixtures extends Fixture
             $this->addReference('ent' . $i, $ent);
             $this->manager->persist($ent);
         }
+
+        $ent1 = new Entreprise();
+
+        $ent1->setLibelle("Pas d'entreprise");
+
+        $this->addReference('ent', $ent1);
+        $this->manager->persist($ent1);
 
     }
 
