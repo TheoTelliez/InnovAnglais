@@ -36,11 +36,27 @@
                             <td><a href="{{path('liste-utilisateurs',{'supp':utilisateur.id})}}"  class="text-white">
                                     <span class="material-icons" title="Supprimer le utilisateur">delete</span></a></td>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {% for utilisateur in utilisateurs %}
+                            <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
+                                <td style="text-align: center">{{utilisateur.nom |capitalize }}</td>
+                                <td style="text-align: center">{{utilisateur.prenom |capitalize }}</td>
+                                <td style="text-align: center">{{utilisateur.abonnement.libelle }}</td>
+                                <td style="text-align: center">{{utilisateur.entreprise.libelle }}</td>
+
+                                <td><a href="{{path('user-profile',{'id':utilisateur.id})}}" class="text-white">
+                                        <span class="material-icons" title="Accéder au profil">account_circle</span></a></td>
+                                <td><a href="{{path('modif-utilisateur',{'id':utilisateur.id})}}" class="text-white">
+                                        <span class="material-icons" title="Modifier un utilisateur">create</span></a></td>
+                                <td><a href="{{path('liste-utilisateurs',{'supp':utilisateur.id})}}"  class="text-white">
+                                        <span class="material-icons" title="Supprimer le utilisateur">delete</span></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
