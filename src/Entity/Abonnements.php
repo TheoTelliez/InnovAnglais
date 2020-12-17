@@ -30,9 +30,12 @@ class Abonnements
     private $paiementenunefois;
 
     /**
-     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="abonnements")
+     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="abonnement")
      */
     private $utilisateurs;
+
+
+
 
     public function __construct()
     {
@@ -93,7 +96,7 @@ class Abonnements
     {
         if (!$this->utilisateurs->contains($utilisateur)) {
             $this->utilisateurs[] = $utilisateur;
-            $utilisateur->setAbonnements($this);
+            $utilisateur->setAbonnement($this);
         }
 
         return $this;
@@ -103,11 +106,15 @@ class Abonnements
     {
         if ($this->utilisateurs->removeElement($utilisateur)) {
             // set the owning side to null (unless already changed)
-            if ($utilisateur->getAbonnements() === $this) {
-                $utilisateur->setAbonnements(null);
+            if ($utilisateur->getAbonnement() === $this) {
+                $utilisateur->setAbonnement(null);
             }
         }
 
         return $this;
     }
+
+
+
+
 }

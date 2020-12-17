@@ -15,6 +15,7 @@
 
             {% if is_granted('IS_AUTHENTICATED_FULLY')%}
                 <h3>Bonjour {{app.user.email}}</h3>
+                <h3>Bonjour {{app.user.utilisateur.nom}} {{app.user.utilisateur.prenom}}</h3>
             {% endif %}
 
         </div>

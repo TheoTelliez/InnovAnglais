@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Abonnements;
 
+
 /**
  * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  * @ApiResource()
@@ -40,31 +41,31 @@ class Utilisateur
 
 
     /**
-     * @ORM\ManyToOne(targetEntity=Abonnements::class, inversedBy="utilisateurs")
-     */
-    private $abonnements;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="utilisateurs")
      */
     private $entreprise;
 
-    /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="utilisateur", cascade={"persist", "remove"})
-     */
-    private $user;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Abonnements::class, inversedBy="utilisateurs")
+     */
+    private $abonnement;
     
 
     public function __construct()
     {
         $this->tests = new ArrayCollection();
         $this->testsrealise = new ArrayCollection();
-        $this->abonnements = new ArrayCollection();
         $this->realises = new ArrayCollection();
     }
 
@@ -154,36 +155,7 @@ class Utilisateur
         return $this;
     }
 
-
-    /**
-     * @return Collection|Abonnements[]
-     */
-    public function getAbonnements(): ?Collection
-    {
-        return $this->abonnements;
-    }
-
-    public function addAbonnement(Abonnements $abonnement): self
-    {
-        if (!$this->abonnements->contains($abonnement)) {
-            $this->abonnements[] = $abonnement;
-            $abonnement->setUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAbonnement(Abonnements $abonnement): self
-    {
-        if ($this->abonnements->removeElement($abonnement)) {
-            // set the owning side to null (unless already changed)
-            if ($abonnement->getUtilisateur() === $this) {
-                $abonnement->setUtilisateur(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection|Realise[]
@@ -216,13 +188,6 @@ class Utilisateur
     }
 
 
-    public function setAbonnements(?Abonnements $abonnements): self
-    {
-        $this->abonnements = $abonnements;
-
-        return $this;
-    }
-
     public function getEntreprise(): ?Entreprise
     {
         return $this->entreprise;
@@ -234,18 +199,7 @@ class Utilisateur
 
         return $this;
     }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
+    
 
     public function getPhoto(): ?string
     {
@@ -255,6 +209,40 @@ class Utilisateur
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setUtilisateur(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getUtilisateur() !== $this) {
+            $user->setUtilisateur($this);
+        }
+
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAbonnement(): ?Abonnements
+    {
+        return $this->abonnement;
+    }
+
+    public function setAbonnement(?Abonnements $abonnement): self
+    {
+        $this->abonnement = $abonnement;
 
         return $this;
     }
