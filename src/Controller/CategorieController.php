@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use App\Form\CategorieType;
+use App\Form\AjoutCategorieType;
 use App\Form\ModifCategorieType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityRepository;
@@ -23,12 +23,12 @@ use Doctrine\ORM\EntityRepository;
 class CategorieController extends AbstractController
 {
     /**
-     * @Route("/categorie", name="categorie")
+     * @Route("/ajout-categorie", name="ajout-categorie")
      */
     public function categorie(Request $request)
     {
         $categorie = new Categorie();
-        $form = $this->createForm(CategorieType::class, $categorie);
+        $form = $this->createForm(AjoutCategorieType::class, $categorie);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
@@ -39,7 +39,7 @@ class CategorieController extends AbstractController
             }
             return $this->redirectToRoute('categorie');
         }
-        return $this->render('categorie/categorie.html.twig', [
+        return $this->render('categorie/ajout-categorie.html.twig', [
             'form' => $form->createView()
         ]);
     }

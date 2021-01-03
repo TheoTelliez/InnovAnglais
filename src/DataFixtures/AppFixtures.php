@@ -58,9 +58,7 @@ class AppFixtures extends Fixture
                 ->setPrenom($this->faker->firstName());
 
 
-
             $utilisateur->setAbonnement($this->getReference('abo' . mt_rand(0, 9)))
-
                 ->setEntreprise($this->getReference('ent' . mt_rand(0, 9)));
 
 
@@ -70,9 +68,7 @@ class AppFixtures extends Fixture
         $utilisateur = new Utilisateur();
         $utilisateur->setNom('TELLIEZ')
             ->setPrenom('theo')
-
             ->setAbonnement($this->getReference('abo' . mt_rand(0, 9)))
-
             ->setEntreprise($this->getReference('ent1'));
         //->setUsers($this->getReference('user10'));
 
@@ -185,6 +181,18 @@ class AppFixtures extends Fixture
         $this->addReference('mot2', $mot);
         $this->manager->persist($mot);
 
+        //-----
+
+        $mot = new Mot();
+
+        $mot->setLibelle("Ordinateur")
+            ->setLibelleen("Computer")
+            ->setCategorie($this->getReference('cat' . mt_rand(0, 9)));
+
+        $this->addReference('mot3', $mot);
+        $this->manager->persist($mot);
+
+
     }
 
     public function loadCat()
@@ -215,12 +223,14 @@ class AppFixtures extends Fixture
 
     public function loadListe()
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 1; $i < 4; $i++) {
             $liste = new Liste();
 
             $liste->setLibelle("Liste" . $i)
                 ->setEntreprise($this->getReference('ent' . mt_rand(0, 9)))
-                ->setTheme($this->getReference('tem' . mt_rand(0, 9)));;
+                ->setTheme($this->getReference('tem' . mt_rand(0, 9)))
+                ->addMot(($this->getReference('mot' . mt_rand(1, 3))))
+                ->addMot(($this->getReference('mot' . mt_rand(1, 3))));
 
             $this->addReference('liste' . $i, $liste);
             $this->manager->persist($liste);

@@ -106,4 +106,37 @@ class EntrepriseController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/stats-entreprises", name="stats-entreprises")
+     */
+    public function statsentreprises(Request $request)
+    {
+        // LA BASE
+
+        $em = $this->getDoctrine();
+        $repoEnt = $em->getRepository(Entreprise::class);
+
+        // ON ETABLI LA CONNEXION
+
+        $conn = $this->getDoctrine()->getManager()->getConnection();
+
+        // POUR LA LISTE AVEC ID, LIBELLE, etc
+
+        $sqlListeEnt = '
+            SELECT e.libelle, COUNT(*) as NbParEnt FROM utilisateur u, entreprise e WHERE u.entreprise_id=e.id GROUP BY u.entreprise_id
+            ';
+        $liste = $conn->prepare($sqlListeEnt);
+        $liste->execute(array());
+
+
+
+        // POUR LE RENDER
+        // Nous passons la liste des entreprises + le count à la vue
+
+        return $this->render('entreprise/stats-entreprises.html.twig', [
+            'entreprises' => $liste, //ICI C'EST AVEC L'ID ET LE LIBELLE
+        ]);
+    }
+
 }

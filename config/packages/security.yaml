@@ -39,4 +39,5 @@ security:
          - { path: ^/ajout-role, roles: ROLE_ADMIN }
          - { path: ^/ajout-theme, roles: ROLE_ADMIN }
          - { path: ^/ajout-mot, roles: ROLE_ADMIN }
+         - { path: ^/ajout-categorie, roles: ROLE_ADMIN }
 

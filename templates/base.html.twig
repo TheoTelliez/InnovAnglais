@@ -20,7 +20,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('accueil') }}">Accueil <span class="sr-only">(current)</span></a>
                 </li>
@@ -29,61 +29,94 @@
                     <a class="nav-link" href="#">A propos</a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Entreprise</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ path('ajout-entreprise') }}">Ajout d'une entreprise</a>
-                        <a class="dropdown-item" href="{{ path('liste-entreprises') }}">Liste des entreprises + SQL</a>
-                    </div>
-                </li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
+                {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Utilisateurs</a>
                     <div class="dropdown-menu">
-
-                        <a class="dropdown-item" href="{{ path('inscrire') }}">Ajout d'un utilisateur</a>
                         <a class="dropdown-item" href="{{ path('liste-utilisateurs') }}">Liste des utilisateurs</a>
-
                     </div>
                 </li>
+                {% endif %}
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">Entreprises</a>
+                    <div class="dropdown-menu">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="dropdown-item" href="{{ path('ajout-entreprise') }}">Ajout d'une entreprise</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{{ path('liste-entreprises') }}">Liste des entreprises</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="dropdown-item" href="{{ path('stats-entreprises') }}">Stats des entreprises</a>
+                        {% endif %}
+                    </div>
+                </li>
+
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Abonnements</a>
                     <div class="dropdown-menu">
+                        {% if is_granted('ROLE_ADMIN') %}
                         <a class="dropdown-item" href="{{ path('ajout-abonnement') }}">Ajout d'un abonnement</a>
-                        <a class="dropdown-item" href="{{ path('liste-abonnements') }}">Liste des Abonnements</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{{ path('liste-abonnements') }}">Liste des abonnements</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a class="dropdown-item" href="{{ path('stats-abonnements') }}">Stats des abonnements</a>
+                        {% endif %}
                     </div>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Role</a>
+                       aria-haspopup="true" aria-expanded="false">Catégories</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ path('ajout-role') }}">Ajout d'un rôle</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a class="dropdown-item" href="{{ path('ajout-categorie') }}">Ajout d'une categorie</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{{ path('liste-categories') }}">Liste des categories</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">Rôles</a>
+                    <div class="dropdown-menu">
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="dropdown-item" href="{{ path('ajout-role') }}">Ajout d'un rôle</a>
+                        {% endif %}
                         <a class="dropdown-item" href="{{ path('liste-roles') }}">Liste des rôles</a>
                     </div>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Thème</a>
+                       aria-haspopup="true" aria-expanded="false">Thèmes</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ path('ajout-theme') }}">Ajout d'un thème</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="dropdown-item" href="{{ path('ajout-theme') }}">Ajout d'un thème</a>
+                        {% endif %}
                         <a class="dropdown-item" href="{{ path('liste-themes') }}">Liste des thèmes</a>
                     </div>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">Mot</a>
+                       aria-haspopup="true" aria-expanded="false">Mots</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ path('ajout-mot') }}">Ajout d'un mot</a>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('ajout-mot') }}">Ajout d'un mot</a>
+                            {% endif %}
+                        {% endif %}
                         <a class="dropdown-item" href="{{ path('liste-mots') }}">Liste des mots</a>
                     </div>
                 </li>
+
+                {% endif %}
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
@@ -98,16 +131,20 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
+
+                        <a class="nav-link" href="{{ path('user-profile',{'id':app.user.utilisateur.id}) }}">Mon profil </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
                     </li>
                 {% endif %}
 
 
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Rechercher">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
-            </form>
+{#            <form class="form-inline my-2 my-lg-0">#}
+{#                <input class="form-control mr-sm-2" type="text" placeholder="Rechercher">#}
+{#                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>#}
+{#            </form>#}
         </div>
     </nav>
 
