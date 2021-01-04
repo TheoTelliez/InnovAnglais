@@ -17,8 +17,8 @@ use App\Entity\Abonnements;
 class Utilisateur
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;

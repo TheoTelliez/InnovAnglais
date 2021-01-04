@@ -174,8 +174,8 @@ class AppFixtures extends Fixture
 
         $mot = new Mot();
 
-        $mot->setLibelle("Arbre")
-            ->setLibelleen("Tree")
+        $mot->setLibelle("Peche")
+            ->setLibelleen("Peach")
             ->setCategorie($this->getReference('cat' . mt_rand(0, 9)));
 
         $this->addReference('mot2', $mot);
@@ -210,7 +210,7 @@ class AppFixtures extends Fixture
 
     public function loadTheme()
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $tem = new Theme();
 
             $tem->setLibelle("Theme" . $i);
@@ -223,18 +223,31 @@ class AppFixtures extends Fixture
 
     public function loadListe()
     {
-        for ($i = 1; $i < 4; $i++) {
-            $liste = new Liste();
 
-            $liste->setLibelle("Liste" . $i)
-                ->setEntreprise($this->getReference('ent' . mt_rand(0, 9)))
-                ->setTheme($this->getReference('tem' . mt_rand(0, 9)))
-                ->addMot(($this->getReference('mot' . mt_rand(1, 3))))
-                ->addMot(($this->getReference('mot' . mt_rand(1, 3))));
+        $liste = new Liste();
 
-            $this->addReference('liste' . $i, $liste);
-            $this->manager->persist($liste);
-        }
+        $liste->setLibelle("Liste1")
+            ->setEntreprise($this->getReference('ent' . mt_rand(0, 9)))
+            ->setTheme($this->getReference('tem' . mt_rand(0, 1)))
+            ->addMot(($this->getReference('mot1')))
+            ->addMot(($this->getReference('mot2')));
+
+        $this->addReference('liste1', $liste);
+        $this->manager->persist($liste);
+
+        //-------
+
+
+        $liste = new Liste();
+
+        $liste->setLibelle("Liste2")
+            ->setEntreprise($this->getReference('ent' . mt_rand(0, 9)))
+            ->setTheme($this->getReference('tem' . mt_rand(0, 1)))
+            ->addMot(($this->getReference('mot3')));
+
+        $this->addReference('liste2', $liste);
+        $this->manager->persist($liste);
+
 
     }
 

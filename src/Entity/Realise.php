@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\RealiseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=RealiseRepository::class)
+ * @ApiResource()
  */
 class Realise
 {

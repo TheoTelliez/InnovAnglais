@@ -6,15 +6,17 @@ use App\Repository\ListeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=ListeRepository::class)
+ * @ApiResource()
  */
 class Liste
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -163,6 +165,9 @@ class Liste
         return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getTheme(): ?Theme
     {
         return $this->theme;
