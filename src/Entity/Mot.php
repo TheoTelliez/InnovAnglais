@@ -44,7 +44,7 @@ class Mot
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
+//        $this->categories = new ArrayCollection();
         $this->liste = new ArrayCollection();
     }
 
@@ -65,35 +65,35 @@ class Mot
         return $this;
     }
 
-    /**
-     * @return Collection|Categorie[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Categorie $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->setMot($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Categorie $category): self
-    {
-        if ($this->categories->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getMot() === $this) {
-                $category->setMot(null);
-            }
-        }
-
-        return $this;
-    }
+//    /**
+//     * @return Collection|Categorie[]
+//     */
+//    public function getCategories(): Collection
+//    {
+//        return $this->categories;
+//    }
+//
+//    public function addCategory(Categorie $category): self
+//    {
+//        if (!$this->categories->contains($category)) {
+//            $this->categories[] = $category;
+//            $category->setMot($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeCategory(Categorie $category): self
+//    {
+//        if ($this->categories->removeElement($category)) {
+//            // set the owning side to null (unless already changed)
+//            if ($category->getMot() === $this) {
+//                $category->setMot(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
     /**
      * @return Collection|Liste[]

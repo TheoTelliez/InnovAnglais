@@ -20,14 +20,9 @@ class Realise
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $score;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $realiseauj;
 
     /**
      * @ORM\ManyToOne(targetEntity=Test::class, inversedBy="realises")
@@ -39,31 +34,24 @@ class Realise
      */
     private $utilisateur;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $datedujour;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getScore(): ?int
+    public function getScore(): ?string
     {
         return $this->score;
     }
 
-    public function setScore(int $score): self
+    public function setScore(string $score): self
     {
         $this->score = $score;
-
-        return $this;
-    }
-
-    public function getRealiseauj(): ?bool
-    {
-        return $this->realiseauj;
-    }
-
-    public function setRealiseauj(bool $realiseauj): self
-    {
-        $this->realiseauj = $realiseauj;
 
         return $this;
     }
@@ -88,6 +76,18 @@ class Realise
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getDatedujour(): ?\DateTimeInterface
+    {
+        return $this->datedujour;
+    }
+
+    public function setDatedujour(?\DateTimeInterface $datedujour): self
+    {
+        $this->datedujour = $datedujour;
 
         return $this;
     }

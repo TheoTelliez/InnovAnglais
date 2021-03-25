@@ -1,29 +1,113 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ parent() }} - Passer un test {% endblock %}
 {% block contenu %}
+    {% set t = [] %}
+    {% for r in app.user.utilisateur.realises %}
+        {% set dateduJ = date() %}
+        {% set dateduTest = r.datedujour %}
+
+        {% if dateduTest|date("Y/m/d") == dateduJ|date("Y/m/d") %}
+            {% set t = t|merge([r.test.id]) %}
+        {% endif %}
+    {% endfor %}
+
     <div class="container-fluid">
         <div class="row justify-content-center">
             <h1 class="text-center text-primary p-4">Passer un test</h1>
         </div>
         <div class="row justify-content-center">
-            <div class="col-6 bg-white p-4 m-0 text-primary" id="divTestG" name="divTestG">
-                {{ form_start(form) }}
-
-                <div class="form-group">
-                    {{ form_label(form.theme, 'Choisir votre thème (*) ', {'label_attr': {'class': 'font-weightbold'}}) }}
-                    {{ form_widget(form.theme, {'attr': {'class': 'form-control'}}) }}
+            <div class="col-8 p-4 m-0 text-primary">
+                <div id="tableauTests" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom du test</th>
+                            <th scope="col">Niveau</th>
+                            <th scope="col">Commencer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for test in tests %}
+                            <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
+                                <td>{{ test.libelle |capitalize }}</td>
+                                <td>{{ test.niveau |capitalize }}</td>
+                                <td>
+                                    <button id="{{ test.id }}" data-id="{{ test.id }}" name="testnumero"
+                                            {% if test.id in t %} disabled {% endif %}
+                                            class="passerletest">
+                                        <span class="material-icons" title="Commencer le test">
+                                            play_arrow
+                                        </span>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
 
-                <div class="form-group mx-auto text-center">
-                    {{ form_widget(form.lancer, { 'label': "Lancer", 'attr': {'class': 'btn font-weightbold bg-primary text-white mx-auto text-center'}}) }}
+                <div id="traduireMot">
+                    <div class="row justify-content-center">
+                        <div class="col-8 bg-dark p-4 m-0 text-primary">
+
+                            <h3>Le mot en français est : <span style="color: white" id="leMotFr"></span></h3>
+                            <div class="form-group" style="color:white">
+                                <label class="font-weightbold">Traduction :</label>
+                                <input id="reponse" name="response" type="text" class="form-control"/>
+                            </div>
+
+                            <div class="form-group mx-auto text-center">
+                                <button id="confirmer"
+                                        class="btn font-weightbold bg-primary text-white mx-auto text-center">Confirmer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                {{ form_end(form) }}
+
+
+                <div id="tableauResults" class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Le mot à traduire</th>
+                            <th scope="col">Votre réponse</th>
+                            <th scope="col">La réponse attendue</th>
+                            <th scope="col">Vos points</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbodyreponses">
+                        </tbody>
+                    </table>
+
+                    <p style="text-align: center; color: white">Votre score est de : <span id="spanScore"></span></p>
+
+                    <form name="passertestform" style="text-align: center" action="{{ path('test') }}" method="post"
+                          enctype="application/x-www-form-urlencoded">
+                        <center>
+
+                            <input type="hidden" name="BDutilisateur" id="BDutilisateur"
+                                   value="{{ app.user.utilisateur.id }}"/>
+
+                            <input type="hidden" name="BDidtest" id="BDidtest"/>
+
+                            <input type="hidden" name="BDscore" id="BDscore"/>
+
+
+                            <button class="btn btn-primary" type="submit">Sauvegarder et quitter</button>
+                        </center>
+                    </form>
+                </div>
+
+
             </div>
+
         </div>
     </div>
+
 {% endblock %}
 
 {% block script %}
-    <script src="./js/passeruntest.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./js/passeruntest.js" crossorigin="anonymous"></script>
 
 {% endblock %}

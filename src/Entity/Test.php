@@ -68,83 +68,83 @@ class Test
         return $this;
     }
 
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getUtilisateur(): Collection
-    {
-        return $this->utilisateur;
-    }
+//    /**
+//     * @return Collection|Utilisateur[]
+//     */
+//    public function getUtilisateur(): Collection
+//    {
+//        return $this->utilisateur;
+//    }
+//
+//    public function addUtilisateur(Utilisateur $utilisateur): self
+//    {
+//        if (!$this->utilisateur->contains($utilisateur)) {
+//            $this->utilisateur[] = $utilisateur;
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeUtilisateur(Utilisateur $utilisateur): self
+//    {
+//        $this->utilisateur->removeElement($utilisateur);
+//
+//        return $this;
+//    }
 
-    public function addUtilisateur(Utilisateur $utilisateur): self
-    {
-        if (!$this->utilisateur->contains($utilisateur)) {
-            $this->utilisateur[] = $utilisateur;
-        }
+//    /**
+//     * @return Collection|Utilisateur[]
+//     */
+//    public function getRealiseTest(): Collection
+//    {
+//        return $this->realise_test;
+//    }
+//
+//    public function addRealiseTest(Utilisateur $realiseTest): self
+//    {
+//        if (!$this->realise_test->contains($realiseTest)) {
+//            $this->realise_test[] = $realiseTest;
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeRealiseTest(Utilisateur $realiseTest): self
+//    {
+//        $this->realise_test->removeElement($realiseTest);
+//
+//        return $this;
+//    }
 
-        return $this;
-    }
-
-    public function removeUtilisateur(Utilisateur $utilisateur): self
-    {
-        $this->utilisateur->removeElement($utilisateur);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getRealiseTest(): Collection
-    {
-        return $this->realise_test;
-    }
-
-    public function addRealiseTest(Utilisateur $realiseTest): self
-    {
-        if (!$this->realise_test->contains($realiseTest)) {
-            $this->realise_test[] = $realiseTest;
-        }
-
-        return $this;
-    }
-
-    public function removeRealiseTest(Utilisateur $realiseTest): self
-    {
-        $this->realise_test->removeElement($realiseTest);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Theme[]
-     */
-    public function getThemes(): Collection
-    {
-        return $this->themes;
-    }
-
-    public function addTheme(Theme $theme): self
-    {
-        if (!$this->themes->contains($theme)) {
-            $this->themes[] = $theme;
-            $theme->setTest($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTheme(Theme $theme): self
-    {
-        if ($this->themes->removeElement($theme)) {
-            // set the owning side to null (unless already changed)
-            if ($theme->getTest() === $this) {
-                $theme->setTest(null);
-            }
-        }
-
-        return $this;
-    }
+//    /**
+//     * @return Collection|Theme[]
+//     */
+//    public function getThemes(): Collection
+//    {
+//        return $this->themes;
+//    }
+//
+//    public function addTheme(Theme $theme): self
+//    {
+//        if (!$this->themes->contains($theme)) {
+//            $this->themes[] = $theme;
+//            $theme->setTest($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeTheme(Theme $theme): self
+//    {
+//        if ($this->themes->removeElement($theme)) {
+//            // set the owning side to null (unless already changed)
+//            if ($theme->getTest() === $this) {
+//                $theme->setTest(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
     /**
      * @return Collection|Realise[]

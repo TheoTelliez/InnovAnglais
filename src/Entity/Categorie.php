@@ -54,17 +54,6 @@ class Categorie
         return $this;
     }
 
-    public function getMot(): ?Mot
-    {
-        return $this->mot;
-    }
-
-    public function setMot(?Mot $mot): self
-    {
-        $this->mot = $mot;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Mot[]

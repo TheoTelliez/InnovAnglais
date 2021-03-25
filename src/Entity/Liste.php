@@ -45,8 +45,8 @@ class Liste
     public function __construct()
     {
         $this->mots = new ArrayCollection();
-        $this->entreprises = new ArrayCollection();
-        $this->themes = new ArrayCollection();
+//        $this->entreprises = new ArrayCollection();
+//        $this->themes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,65 +93,65 @@ class Liste
         return $this;
     }
 
-    /**
-     * @return Collection|Entreprise[]
-     */
-    public function getEntreprises(): Collection
-    {
-        return $this->entreprises;
-    }
-
-    public function addEntreprise(Entreprise $entreprise): self
-    {
-        if (!$this->entreprises->contains($entreprise)) {
-            $this->entreprises[] = $entreprise;
-            $entreprise->setListe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEntreprise(Entreprise $entreprise): self
-    {
-        if ($this->entreprises->removeElement($entreprise)) {
-            // set the owning side to null (unless already changed)
-            if ($entreprise->getListe() === $this) {
-                $entreprise->setListe(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Theme[]
-     */
-    public function getThemes(): Collection
-    {
-        return $this->themes;
-    }
-
-    public function addTheme(Theme $theme): self
-    {
-        if (!$this->themes->contains($theme)) {
-            $this->themes[] = $theme;
-            $theme->setListe($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTheme(Theme $theme): self
-    {
-        if ($this->themes->removeElement($theme)) {
-            // set the owning side to null (unless already changed)
-            if ($theme->getListe() === $this) {
-                $theme->setListe(null);
-            }
-        }
-
-        return $this;
-    }
+//    /**
+//     * @return Collection|Entreprise[]
+//     */
+//    public function getEntreprises(): Collection
+//    {
+//        return $this->entreprises;
+//    }
+//
+//    public function addEntreprise(Entreprise $entreprise): self
+//    {
+//        if (!$this->entreprises->contains($entreprise)) {
+//            $this->entreprises[] = $entreprise;
+//            $entreprise->setListe($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeEntreprise(Entreprise $entreprise): self
+//    {
+//        if ($this->entreprises->removeElement($entreprise)) {
+//            // set the owning side to null (unless already changed)
+//            if ($entreprise->getListe() === $this) {
+//                $entreprise->setListe(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * @return Collection|Theme[]
+//     */
+//    public function getThemes(): Collection
+//    {
+//        return $this->themes;
+//    }
+//
+//    public function addTheme(Theme $theme): self
+//    {
+//        if (!$this->themes->contains($theme)) {
+//            $this->themes[] = $theme;
+//            $theme->setListe($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeTheme(Theme $theme): self
+//    {
+//        if ($this->themes->removeElement($theme)) {
+//            // set the owning side to null (unless already changed)
+//            if ($theme->getListe() === $this) {
+//                $theme->setListe(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
     public function getEntreprise(): ?Entreprise
     {

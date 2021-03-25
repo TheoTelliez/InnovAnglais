@@ -101,59 +101,59 @@ class Utilisateur
 
 
 
-    /**
-     * @return Collection|Test[]
-     */
-    public function getTests(): Collection
-    {
-        return $this->tests;
-    }
+//    /**
+//     * @return Collection|Test[]
+//     */
+//    public function getTests(): Collection
+//    {
+//        return $this->tests;
+//    }
+//
+//    public function addTest(Test $test): self
+//    {
+//        if (!$this->tests->contains($test)) {
+//            $this->tests[] = $test;
+//            $test->addUtilisateur($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeTest(Test $test): self
+//    {
+//        if ($this->tests->removeElement($test)) {
+//            $test->removeUtilisateur($this);
+//        }
+//
+//        return $this;
+//    }
 
-    public function addTest(Test $test): self
-    {
-        if (!$this->tests->contains($test)) {
-            $this->tests[] = $test;
-            $test->addUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTest(Test $test): self
-    {
-        if ($this->tests->removeElement($test)) {
-            $test->removeUtilisateur($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Test[]
-     */
-    public function getTestsrealise(): Collection
-    {
-        return $this->testsrealise;
-    }
-
-    public function addTestsrealise(Test $testsrealise): self
-    {
-        if (!$this->testsrealise->contains($testsrealise)) {
-            $this->testsrealise[] = $testsrealise;
-            $testsrealise->addRealiseTest($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTestsrealise(Test $testsrealise): self
-    {
-        if ($this->testsrealise->removeElement($testsrealise)) {
-            $testsrealise->removeRealiseTest($this);
-        }
-
-        return $this;
-    }
+//    /**
+//     * @return Collection|Test[]
+//     */
+//    public function getTestsrealise(): Collection
+//    {
+//        return $this->testsrealise;
+//    }
+//
+//    public function addTestsrealise(Test $testsrealise): self
+//    {
+//        if (!$this->testsrealise->contains($testsrealise)) {
+//            $this->testsrealise[] = $testsrealise;
+//            $testsrealise->addRealiseTest($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeTestsrealise(Test $testsrealise): self
+//    {
+//        if ($this->testsrealise->removeElement($testsrealise)) {
+//            $testsrealise->removeRealiseTest($this);
+//        }
+//
+//        return $this;
+//    }
 
 
 

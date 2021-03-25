@@ -60,17 +60,17 @@ class Entreprise
         return $this;
     }
 
-    public function getListe(): ?Liste
-    {
-        return $this->liste;
-    }
-
-    public function setListe(?Liste $liste): self
-    {
-        $this->liste = $liste;
-
-        return $this;
-    }
+//    public function getListe(): ?Liste
+//    {
+//        return $this->liste;
+//    }
+//
+//    public function setListe(?Liste $liste): self
+//    {
+//        $this->liste = $liste;
+//
+//        return $this;
+//    }
 
     /**
      * @return Collection|Liste[]

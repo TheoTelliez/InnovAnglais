@@ -26,10 +26,10 @@ class Role
      */
     private $libelle;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="role")
-     */
-    private $utilisateurs;
+//    /**
+//     * @ORM\OneToMany(targetEntity=Utilisateur::class, mappedBy="role")
+//     */
+//    private $utilisateurs;
 
     public function __construct()
     {
@@ -54,45 +54,45 @@ class Role
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
-    {
-        return $this->utilisateur;
-    }
+//    public function getUtilisateur(): ?Utilisateur
+//    {
+//        return $this->utilisateur;
+//    }
+//
+//    public function setUtilisateur(?Utilisateur $utilisateur): self
+//    {
+//        $this->utilisateur = $utilisateur;
+//
+//        return $this;
+//    }
 
-    public function setUtilisateur(?Utilisateur $utilisateur): self
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Utilisateur[]
-     */
-    public function getUtilisateurs(): Collection
-    {
-        return $this->utilisateurs;
-    }
-
-    public function addUtilisateur(Utilisateur $utilisateur): self
-    {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs[] = $utilisateur;
-            $utilisateur->setRole($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUtilisateur(Utilisateur $utilisateur): self
-    {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
-            // set the owning side to null (unless already changed)
-            if ($utilisateur->getRole() === $this) {
-                $utilisateur->setRole(null);
-            }
-        }
-
-        return $this;
-    }
+//    /**
+//     * @return Collection|Utilisateur[]
+//     */
+//    public function getUtilisateurs(): Collection
+//    {
+//        return $this->utilisateurs;
+//    }
+//
+//    public function addUtilisateur(Utilisateur $utilisateur): self
+//    {
+//        if (!$this->utilisateurs->contains($utilisateur)) {
+//            $this->utilisateurs[] = $utilisateur;
+//            $utilisateur->setRole($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeUtilisateur(Utilisateur $utilisateur): self
+//    {
+//        if ($this->utilisateurs->removeElement($utilisateur)) {
+//            // set the owning side to null (unless already changed)
+//            if ($utilisateur->getRole() === $this) {
+//                $utilisateur->setRole(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 }

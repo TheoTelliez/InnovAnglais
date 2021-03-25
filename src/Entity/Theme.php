@@ -61,29 +61,29 @@ class Theme
         return $this;
     }
 
-    public function getListe(): ?Liste
-    {
-        return $this->liste;
-    }
+//    public function getListe(): ?Liste
+//    {
+//        return $this->liste;
+//    }
+//
+//    public function setListe(?Liste $liste): self
+//    {
+//        $this->liste = $liste;
+//
+//        return $this;
+//    }
 
-    public function setListe(?Liste $liste): self
-    {
-        $this->liste = $liste;
-
-        return $this;
-    }
-
-    public function getTest(): ?Test
-    {
-        return $this->test;
-    }
-
-    public function setTest(?Test $test): self
-    {
-        $this->test = $test;
-
-        return $this;
-    }
+//    public function getTest(): ?Test
+//    {
+//        return $this->test;
+//    }
+//
+//    public function setTest(?Test $test): self
+//    {
+//        $this->test = $test;
+//
+//        return $this;
+//    }
 
     /**
      * @return Collection|Liste[]
