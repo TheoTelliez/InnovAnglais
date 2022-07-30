@@ -29,98 +29,111 @@
                     <a class="nav-link" href="#">A propos</a>
                 </li>
 
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                               aria-haspopup="true" aria-expanded="false">Utilisateurs</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ path('liste-utilisateurs') }}">Liste des
-                                    utilisateurs</a>
-                            </div>
-                        </li>
-                    {% endif %}
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Entreprises</a>
-                        <div class="dropdown-menu">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a class="dropdown-item" href="{{ path('ajout-entreprise') }}">Ajout d'une
-                                    entreprise</a>
-                            {% endif %}
-                            <a class="dropdown-item" href="{{ path('liste-entreprises') }}">Liste des entreprises</a>
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a class="dropdown-item" href="{{ path('stats-entreprises') }}">Stats des
-                                    entreprises</a>
-                            {% endif %}
-                        </div>
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('inscrire')}}">S'inscrire</a>
                     </li>
-
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Abonnements</a>
-                        <div class="dropdown-menu">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a class="dropdown-item" href="{{ path('ajout-abonnement') }}">Ajout d'un abonnement</a>
-                            {% endif %}
-                            <a class="dropdown-item" href="{{ path('liste-abonnements') }}">Liste des abonnements</a>
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a class="dropdown-item" href="{{ path('stats-abonnements') }}">Stats des
-                                    abonnements</a>
-                            {% endif %}
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('app_login')}}">Se connecter</a>
                     </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Catégories</a>
-                        <div class="dropdown-menu">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a class="dropdown-item" href="{{ path('ajout-categorie') }}">Ajout d'une categorie</a>
-                            {% endif %}
-                            <a class="dropdown-item" href="{{ path('liste-categories') }}">Liste des categories</a>
-                        </div>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('app_logout')}}">Se déconnecter</a>
                     </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Rôles</a>
-                        <div class="dropdown-menu">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a class="dropdown-item" href="{{ path('ajout-role') }}">Ajout d'un rôle</a>
-                            {% endif %}
-                            <a class="dropdown-item" href="{{ path('liste-roles') }}">Liste des rôles</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Thèmes</a>
-                        <div class="dropdown-menu">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <a class="dropdown-item" href="{{ path('ajout-theme') }}">Ajout d'un thème</a>
-                            {% endif %}
-                            <a class="dropdown-item" href="{{ path('liste-themes') }}">Liste des thèmes</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="true" aria-expanded="false">Mots</a>
-                        <div class="dropdown-menu">
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <a class="dropdown-item" href="{{ path('ajout-mot') }}">Ajout d'un mot</a>
-                                {% endif %}
-                            {% endif %}
-                            <a class="dropdown-item" href="{{ path('liste-mots') }}">Liste des mots</a>
-                        </div>
-                    </li>
-
                 {% endif %}
+
+{#                {% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+
+{#                    {% if is_granted('ROLE_ADMIN') %}#}
+{#                        <li class="nav-item dropdown">#}
+{#                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"#}
+{#                               aria-haspopup="true" aria-expanded="false">Utilisateurs</a>#}
+{#                            <div class="dropdown-menu">#}
+{#                                <a class="dropdown-item" href="{{ path('liste-utilisateurs') }}">Liste des#}
+{#                                    utilisateurs</a>#}
+{#                            </div>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"#}
+{#                           aria-haspopup="true" aria-expanded="false">Entreprises</a>#}
+{#                        <div class="dropdown-menu">#}
+{#                            {% if is_granted('ROLE_ADMIN') %}#}
+{#                                <a class="dropdown-item" href="{{ path('ajout-entreprise') }}">Ajout d'une#}
+{#                                    entreprise</a>#}
+{#                            {% endif %}#}
+{#                            <a class="dropdown-item" href="{{ path('liste-entreprises') }}">Liste des entreprises</a>#}
+{#                            {% if is_granted('ROLE_ADMIN') %}#}
+{#                                <a class="dropdown-item" href="{{ path('stats-entreprises') }}">Stats des#}
+{#                                    entreprises</a>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                    </li>#}
+
+
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"#}
+{#                           aria-haspopup="true" aria-expanded="false">Abonnements</a>#}
+{#                        <div class="dropdown-menu">#}
+{#                            {% if is_granted('ROLE_ADMIN') %}#}
+{#                                <a class="dropdown-item" href="{{ path('ajout-abonnement') }}">Ajout d'un abonnement</a>#}
+{#                            {% endif %}#}
+{#                            <a class="dropdown-item" href="{{ path('liste-abonnements') }}">Liste des abonnements</a>#}
+{#                            {% if is_granted('ROLE_ADMIN') %}#}
+{#                                <a class="dropdown-item" href="{{ path('stats-abonnements') }}">Stats des#}
+{#                                    abonnements</a>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                    </li>#}
+
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"#}
+{#                           aria-haspopup="true" aria-expanded="false">Catégories</a>#}
+{#                        <div class="dropdown-menu">#}
+{#                            {% if is_granted('ROLE_ADMIN') %}#}
+{#                                <a class="dropdown-item" href="{{ path('ajout-categorie') }}">Ajout d'une categorie</a>#}
+{#                            {% endif %}#}
+{#                            <a class="dropdown-item" href="{{ path('liste-categories') }}">Liste des categories</a>#}
+{#                        </div>#}
+{#                    </li>#}
+
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"#}
+{#                           aria-haspopup="true" aria-expanded="false">Rôles</a>#}
+{#                        <div class="dropdown-menu">#}
+{#                            {% if is_granted('ROLE_ADMIN') %}#}
+{#                                <a class="dropdown-item" href="{{ path('ajout-role') }}">Ajout d'un rôle</a>#}
+{#                            {% endif %}#}
+{#                            <a class="dropdown-item" href="{{ path('liste-roles') }}">Liste des rôles</a>#}
+{#                        </div>#}
+{#                    </li>#}
+
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"#}
+{#                           aria-haspopup="true" aria-expanded="false">Thèmes</a>#}
+{#                        <div class="dropdown-menu">#}
+{#                            {% if is_granted('ROLE_ADMIN') %}#}
+{#                                <a class="dropdown-item" href="{{ path('ajout-theme') }}">Ajout d'un thème</a>#}
+{#                            {% endif %}#}
+{#                            <a class="dropdown-item" href="{{ path('liste-themes') }}">Liste des thèmes</a>#}
+{#                        </div>#}
+{#                    </li>#}
+
+{#                    <li class="nav-item dropdown">#}
+{#                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"#}
+{#                           aria-haspopup="true" aria-expanded="false">Mots</a>#}
+{#                        <div class="dropdown-menu">#}
+{#                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+{#                                {% if is_granted('ROLE_ADMIN') %}#}
+{#                                    <a class="dropdown-item" href="{{ path('ajout-mot') }}">Ajout d'un mot</a>#}
+{#                                {% endif %}#}
+{#                            {% endif %}#}
+{#                            <a class="dropdown-item" href="{{ path('liste-mots') }}">Liste des mots</a>#}
+{#                        </div>#}
+{#                    </li>#}
+
+{#                {% endif %}#}
 
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>

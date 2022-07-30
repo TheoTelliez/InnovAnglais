@@ -13,7 +13,6 @@
                         <thead>
                         <tr>
                             <th scope="col">Libellé</th>
-                            <th scope="col">Modifier</th>
                             <th scope="col">Supprimer</th>
                         </tr>
                         </thead>
@@ -21,8 +20,6 @@
                         {% for ent in entreprises %}
                         <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
                             <td>{{ ent.libelle |capitalize }}</td>
-                            <td><a href="" class="text-white"><span
-                                            class="material-icons" title="Modifier une entreprise">create</span></a></td>
                             <td><a href="{{path('liste-entreprises',{'supp':ent.id})}}" class="text-white"><span
                                             class="material-icons" title="Supprimer l'entreprise">delete</span></a></td>
                         </tr>
